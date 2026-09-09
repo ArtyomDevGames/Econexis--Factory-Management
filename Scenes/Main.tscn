@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://brl67v6jdaq01"]
+
+[ext_resource type="Script" uid="uid://udtbcw8s6n7u" path="res://Scripts/CameraController.gd" id="1_r150o"]
+[ext_resource type="Script" uid="uid://bi5loqvn1p8el" path="res://Scripts/grid_manager.gd" id="2_idj7w"]
+[ext_resource type="Script" uid="uid://bvda2n7x3ene3" path="res://Scripts/canvas_layer.gd" id="3_kln2b"]
+
+[sub_resource type="Environment" id="Environment_c1w88"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bhunq"]
+size = Vector2(25, 25)
+
+[node name="Node3D" type="Node3D" unique_id=107307697]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2018760039]
+environment = SubResource("Environment_c1w88")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1359740346]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=435134208]
+mesh = SubResource("PlaneMesh_bhunq")
+
+[node name="RTSCameraController" type="Node3D" parent="." unique_id=42060275]
+script = ExtResource("1_r150o")
+
+[node name="Camera3D" type="Camera3D" parent="RTSCameraController" unique_id=585468771]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 15, 15)
+
+[node name="GridManager" type="Node3D" parent="." unique_id=252728122]
+script = ExtResource("2_idj7w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1795358696 node_paths=PackedStringArray("grid_manager")]
+script = ExtResource("3_kln2b")
+grid_manager = NodePath("../GridManager")
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=99385250]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="CoinsLabel" type="Label" parent="CanvasLayer/Control" unique_id=1622677069]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 34
+
+[node name="BuyFactoryButton" type="Button" parent="CanvasLayer/Control" unique_id=1489831920]
+layout_mode = 0
+offset_left = 221.0
+offset_top = 502.0
+offset_right = 347.0
+offset_bottom = 630.0
+text = "Build a factory ($150)"
